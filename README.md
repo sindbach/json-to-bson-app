@@ -1,3 +1,6 @@
+[![Netlify Status](https://api.netlify.com/api/v1/badges/35d361cc-384b-44a4-9097-95e94ecec7a4/deploy-status)](https://app.netlify.com/sites/romantic-mcclintock-34c356/deploys)
+
+
 # JSON To BSON App
 
 An app to aid developers to generate Go BSON class maps
