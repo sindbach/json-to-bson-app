@@ -18,12 +18,6 @@ func logRequest(next http.Handler) http.Handler {
 	})
 }
 
-func getIndex(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Content-Type", "application/json")
-	w.WriteHeader(http.StatusOK)
-	json.NewEncoder(w).Encode(map[string]interface{}{"msg": "JSON To BSON"})
-}
-
 func transformProcess(w http.ResponseWriter, r *http.Request) {
 	decoder := json.NewDecoder(r.Body)
 	var doc bson.M
@@ -31,8 +25,9 @@ func transformProcess(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		log.Fatal(err)
 	}
+	log.Println(doc)
 	w.Header().Set("Content-Type", "application/json")
-	json.NewEncoder(w).Encode(bson.M{"items": []bson.M{bson.M{"k": "COLLSCAN", "v": "TODO"}}})
+	json.NewEncoder(w).Encode(bson.M{"output": "struct type {}"})
 }
 
 func main() {
@@ -46,7 +41,7 @@ func main() {
 	router.Use(logRequest)
 
 	c := cors.New(cors.Options{
-		AllowedOrigins: []string{"http://localhost:1234"},
+		AllowedOrigins: []string{"http://localhost:8080"},
 		AllowedMethods: []string{"GET", "POST", "OPTIONS"},
 		AllowedHeaders: []string{"*"},
 	})

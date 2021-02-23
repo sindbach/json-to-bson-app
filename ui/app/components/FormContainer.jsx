@@ -40,28 +40,32 @@ class FormContainer extends Component {
 
     this.handleFormSubmit = this.handleFormSubmit.bind(this);
     this.handleClearForm = this.handleClearForm.bind(this);
+    this.handleCodeChange = this.handleCodeChange.bind(this);
   }
 
   componentDidMount() {
   }
 
+  handleCodeChange(newValue){
+    this.state.input = newValue[0];
+  }
+
   handleFormSubmit(e) {
     e.preventDefault();
-    let input = this.state.input;
     this.state.showProgress = true; 
     this.setState(this.state);
-
+    console.log(this.state.input);
     fetch("http://127.0.0.1:8080/api/v1/transform", {
         method:'POST', 
         mode:'cors',
         cache:'no-cache',
         headers: {'Content-Type': 'application/json'}, 
         redirect:'follow', 
-        body: JSON.stringify(input)}
+        body: this.state.input}
         ).then(response => {
           return response.json();
-        }).then(data=>{
-          this.state.output = data;
+        }).then(result=>{
+          this.state.output = result.output;
           this.state.showProgress = false;
           this.setState(this.state);
     }); 
