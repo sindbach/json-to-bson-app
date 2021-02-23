@@ -1,0 +1,28 @@
+{
+    "name": "json-to-bson",
+    "version": "0.1.0",
+    "description": "AutoGenerate Go BSON Class Maps",
+    "author": "@sindbach",
+    "scripts": {
+        "start": "parcel index.html",
+        "build": "parcel build index.html"
+    },
+    "dependencies": {
+        "@material-ui/core": "^4.11.1",
+        "@material-ui/icons": "^4.11.1",
+        "ace-builds": "^1.4.12",
+        "bootstrap": "^4.6.0",
+        "brace": "^0.11.1",
+        "node-forge": "^0.10.0",
+        "react": "^17.0.1",
+        "react-ace": "^9.3.0",
+        "react-dom": "^17.0.1",
+        "react-router-dom": "^5.2.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.13.0",
+        "@babel/preset-react": "^7.12.13",
+        "parcel-bundler": "^1.12.4",
+        "parcel-plugin-clean-dist": "0.0.6"
+    }
+}
