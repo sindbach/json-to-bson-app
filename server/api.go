@@ -25,7 +25,6 @@ func getIndex(w http.ResponseWriter, r *http.Request) {
 }
 
 func transformProcess(w http.ResponseWriter, r *http.Request) {
-	log.Printf("here\n")
 	decoder := json.NewDecoder(r.Body)
 	var doc bson.M
 	err := decoder.Decode(&doc)
