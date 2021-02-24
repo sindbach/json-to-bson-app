@@ -19,9 +19,9 @@ type BodyResponse struct {
 
 // BodyInput is the input
 type BodyInput struct {
-	Content string `json:"content"`
-	ExtJSON bool   `json:"error"`
-	TopName string `json:"topname"`
+	Content map[string]interface{} `json:"content"`
+	ExtJSON bool                   `json:"error"`
+	TopName string                 `json:"topname"`
 }
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
