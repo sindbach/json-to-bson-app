@@ -38,15 +38,15 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 		fmt.Println(fmt.Sprintf("Could not marshal JSON : [%s]", err.Error()))
 		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
 	}
-	fmt.Println(contentString)
+	fmt.Println(string(contentString))
 	var result string
 	opt := options.NewOptions()
 	if bodyInput.ExtJSON == true {
 		fmt.Println("extended")
-		result, err = extjson.Convert([]byte(contentString), true)
+		result, err = extjson.Convert(contentString, true)
 	} else {
 		fmt.Println("standard")
-		result, err = simplejson.Convert([]byte(contentString), opt)
+		result, err = simplejson.Convert(contentString, opt)
 	}
 	fmt.Println(result)
 
@@ -54,6 +54,8 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	if err != nil {
 		errMsg = err.Error()
 	}
+	fmt.Println(errMsg)
+
 	response := BodyResponse{Output: result, Error: errMsg}
 	bodyresponse, err := json.Marshal(&response)
 	if err != nil {
