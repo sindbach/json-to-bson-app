@@ -74,7 +74,7 @@ class FormContainer extends Component {
     this.state.showProgress = true; 
     this.setState(this.state);
     var param = {
-      "content": this.state.content, 
+      "content": JSON.parse(this.state.content), 
       "extjson": this.state.extjson, 
       "topname": this.state.topname,
     };
