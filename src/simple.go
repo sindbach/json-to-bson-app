@@ -2,7 +2,7 @@ package main
 
 import (
 	"encoding/json"
-
+	"fmt"
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
@@ -17,14 +17,19 @@ type BodyResponse struct {
 }
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
+	doc := request.Body
+	fmt.Println(doc)
 	opt := options.NewOptions()
-	result, err := simplejson.Convert([]byte(request.Body), opt)
+	result, err := simplejson.Convert([]byte(doc), opt)
+	fmt.Println(result)
+	fmt.Println(err.Error())
 	response := BodyResponse{Output: result, Error: err.Error()}
 
 	bodyresponse, err := json.Marshal(&response)
 	if err != nil {
 		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
 	}
+
 	return &events.APIGatewayProxyResponse{
 		StatusCode:      200,
 		Headers:         map[string]string{"Content-Type": "application/json"},
