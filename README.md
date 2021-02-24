@@ -23,7 +23,7 @@ parcel build ./index.html
 
 ```
 cd ./src
-GOOS=linux GOARCH=amd64 go build -o ../functions/simple simple.go    
+GOOS=linux GOARCH=amd64 go build -o ../functions/convert convert.go    
 ```
 
 ## License

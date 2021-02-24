@@ -55,7 +55,7 @@ class FormContainer extends Component {
     this.state.showProgress = true; 
     this.setState(this.state);
     console.log(this.state.input);
-    fetch("/.netlify/functions/simple", {
+    fetch("/.netlify/functions/convert", {
         method:'POST', 
         mode:'cors',
         cache:'no-cache',
