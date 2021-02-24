@@ -26,7 +26,7 @@ type BodyInput struct {
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	doc := []byte(request.Body)
-	fmt.Println(doc)
+	fmt.Println(string(doc))
 	var bodyInput BodyInput
 	err := json.Unmarshal(doc, &bodyInput)
 	if err != nil {

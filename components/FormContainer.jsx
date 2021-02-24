@@ -85,7 +85,7 @@ class FormContainer extends Component {
         cache:'no-cache',
         headers: {'Content-Type': 'application/json'}, 
         redirect:'follow', 
-        body: param}
+        body: JSON.stringify(param)}
         ).then(response => {
           return response.json();
         }).then(result=>{
