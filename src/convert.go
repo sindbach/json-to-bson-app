@@ -20,7 +20,7 @@ type BodyResponse struct {
 // BodyInput is the input
 type BodyInput struct {
 	Content map[string]interface{} `json:"content"`
-	ExtJSON bool                   `json:"error"`
+	ExtJSON bool                   `json:"extjson"`
 	TopName string                 `json:"topname"`
 }
 
