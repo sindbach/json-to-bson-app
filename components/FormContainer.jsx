@@ -55,7 +55,7 @@ class FormContainer extends Component {
     this.state.showProgress = true; 
     this.setState(this.state);
     console.log(this.state.input);
-    fetch("http://127.0.0.1:8080/api/v1/transform", {
+    fetch("/.netlify/functions/simple", {
         method:'POST', 
         mode:'cors',
         cache:'no-cache',
