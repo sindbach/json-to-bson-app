@@ -65,6 +65,7 @@ class FormContainer extends Component {
         ).then(response => {
           return response.json();
         }).then(result=>{
+          console.log(result);
           this.state.output = result.output;
           this.state.showProgress = false;
           this.setState(this.state);
