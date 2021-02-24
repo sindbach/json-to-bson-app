@@ -6,6 +6,7 @@ import (
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
+	"github.com/sindbach/json-to-bson-go/extjson"
 	"github.com/sindbach/json-to-bson-go/options"
 	"github.com/sindbach/json-to-bson-go/simplejson"
 )
@@ -16,12 +17,39 @@ type BodyResponse struct {
 	Error  string `json:"error"`
 }
 
+// BodyInput is the input
+type BodyInput struct {
+	Content string `json:"content"`
+	ExtJSON bool   `json:"error"`
+	TopName string `json:"topname"`
+}
+
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
-	doc := request.Body
+	doc := []byte(request.Body)
 	fmt.Println(doc)
+	var bodyInput BodyInput
+	err := json.Unmarshal(doc, &bodyInput)
+	if err != nil {
+		fmt.Println(fmt.Sprintf("Could not unmarshal JSON string: [%s]", err.Error()))
+		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
+	}
+	contentString, err := json.Marshal(bodyInput.Content)
+	if err != nil {
+		fmt.Println(fmt.Sprintf("Could not marshal JSON : [%s]", err.Error()))
+		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
+	}
+	fmt.Println(contentString)
+	var result string
 	opt := options.NewOptions()
-	result, err := simplejson.Convert([]byte(doc), opt)
+	if bodyInput.ExtJSON == true {
+		fmt.Println("extended")
+		result, err = extjson.Convert([]byte(contentString), true)
+	} else {
+		fmt.Println("standard")
+		result, err = simplejson.Convert([]byte(contentString), opt)
+	}
 	fmt.Println(result)
+
 	errMsg := ""
 	if err != nil {
 		errMsg = err.Error()
