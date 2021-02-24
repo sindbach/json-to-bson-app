@@ -125,7 +125,7 @@ class FormContainer extends Component {
                     color="primary" 
                     onClick={this.handleFormSubmit}
             >
-            Transform
+            Convert
             </Button>
             </Grid>
             <Grid item xs>

@@ -29,7 +29,7 @@ class MainContainer extends Component {
         <main className={classes.content}>
           <div className={classes.toolbar} />
           <Typography className={classes.typography} paragraph>
-            Transform JSON to Go BSON Class Maps
+            Convert JSON to Go BSON Class Maps.
           </Typography>
           <FormContainer />
           <br/>
