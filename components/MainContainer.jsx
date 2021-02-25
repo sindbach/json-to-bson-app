@@ -7,6 +7,9 @@ import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
 import FormContainer from "./FormContainer";
 import TransformIcon from '@material-ui/icons/Transform';
+import Link from '@material-ui/core/Link';
+import Paper from '@material-ui/core/Paper';
+
 
 const styles = theme => ({
   icon: {
@@ -19,10 +22,15 @@ const styles = theme => ({
     padding: theme.spacing(1),
   },
   typography: {
-    fontSize:18,
+    fontSize:16,
   },
   title: {
     flexGrow: 1,
+  },
+  paper: {
+    padding: theme.spacing(2),
+    textAlign: 'left',
+    color: theme.palette.text.secondary,
   },
 });
 
@@ -45,11 +53,16 @@ class MainContainer extends Component {
                 </Typography>
               </Toolbar>
             </AppBar>
-          <br/><br/>
           <main className={classes.content}>
-          <Typography className={classes.typography} paragraph>
-            Convert JSON to Go BSON Class Maps.
-          </Typography>
+              <Paper className={classes.paper}>
+              <Typography className={classes.typography} paragraph>
+                This application converts JSON into Golang class mapping. Paste a JSON document and the equivalent Go code will be automatically generated. 
+                The code output utilises <Link href="https://pkg.go.dev/go.mongodb.org/mongo-driver/bson">go.mongodb.org/mongo-driver/bson</Link>, 
+                and is ideal to be used to read/write into <Link href="https://www.mongodb.com/">MongoDB</Link>. 
+                <br/>
+                The conversion is performed using Go module <Link href="https://github.com/sindbach/json-to-bson-go"> github.com/sindbach/json-to-bson-go</Link>.
+              </Typography>
+              </Paper>
           <FormContainer />
           <br/>
         </main>
