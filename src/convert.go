@@ -19,37 +19,38 @@ type BodyResponse struct {
 
 // BodyInput is the input
 type BodyInput struct {
-	Content map[string]interface{} `json:"content"`
-	ExtJSON bool                   `json:"extjson"`
-	TopName string                 `json:"topname"`
+	Content     map[string]interface{} `json:"content"`
+	ExtJSON     bool                   `json:"extjson"`
+	TopName     string                 `json:"topname"`
+	MinIntSize  bool                   `json:"minintsize"`
+	TruncateInt bool                   `json:"truncateint"`
 }
 
 func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResponse, error) {
 	doc := []byte(request.Body)
-	fmt.Println(string(doc))
+
 	var bodyInput BodyInput
 	err := json.Unmarshal(doc, &bodyInput)
 	if err != nil {
 		fmt.Println(fmt.Sprintf("Could not unmarshal JSON string: [%s]", err.Error()))
-		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
+		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 500}, nil
 	}
 	contentString, err := json.Marshal(bodyInput.Content)
 	if err != nil {
 		fmt.Println(fmt.Sprintf("Could not marshal JSON : [%s]", err.Error()))
-		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
+		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 500}, nil
 	}
-	fmt.Println(string(contentString))
-	var result string
 	opt := options.NewOptions()
+	opt.SetStructName(bodyInput.TopName)
+	opt.SetMinimizeIntegerSize(bodyInput.MinIntSize)
+	opt.SetTruncateIntegers(bodyInput.TruncateInt)
+
+	var result string
 	if bodyInput.ExtJSON == true {
-		fmt.Println("extended")
-		result, err = extjson.Convert(contentString, true)
+		result, err = extjson.Convert(contentString, opt)
 	} else {
-		fmt.Println("standard")
 		result, err = simplejson.Convert(contentString, opt)
 	}
-	fmt.Println(result)
-
 	errMsg := ""
 	if err != nil {
 		errMsg = err.Error()
@@ -59,7 +60,7 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	response := BodyResponse{Output: result, Error: errMsg}
 	bodyresponse, err := json.Marshal(&response)
 	if err != nil {
-		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 404}, nil
+		return &events.APIGatewayProxyResponse{Body: err.Error(), StatusCode: 500}, nil
 	}
 
 	return &events.APIGatewayProxyResponse{
