@@ -141,14 +141,15 @@ type AutoGen struct {
   }
 
   createRecord(data){
-    if (data.hasOwnProperty('content')){data.content = "N/A";}
-    data.sessionId = this.state.sessionId;
+    var record = data; 
+    if (record.hasOwnProperty('content')){record.content = "N/A";}
+    record.sessionId = this.state.sessionId;
     fetch("https://webhooks.mongodb-realm.com/api/client/v2.0/app/json-to-bson-metrics-hozoa/service/record/incoming_webhook/createRecord", {
       method:'POST', 
       mode:'cors',
       cache:'no-cache',
       headers: {'Content-Type': 'application/json'}, 
-      body: JSON.stringify(data)}
+      body: JSON.stringify(record)}
     );
   }
 
