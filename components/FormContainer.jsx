@@ -195,7 +195,7 @@ type AutoGen struct {
             return;
           }
           console.log(result);
-          if (result.errorMessage !== "") {
+          if (result.hasOwnProperty("errorMessage") && result.errorMessage !== "") {
             this.handleValidationAlertOpen(
               "Module Error: " + result.errorMessage
             );
