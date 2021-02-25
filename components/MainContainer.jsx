@@ -60,7 +60,7 @@ class MainContainer extends Component {
                 The code output utilises <Link href="https://pkg.go.dev/go.mongodb.org/mongo-driver/bson">go.mongodb.org/mongo-driver/bson</Link>, 
                 and is ideal to be used to read/write into <Link href="https://www.mongodb.com/">MongoDB</Link>. 
                 <br/>
-                The conversion is performed using Go module <Link href="https://github.com/sindbach/json-to-bson-go"> github.com/sindbach/json-to-bson-go</Link>.
+                The conversion is performed using Go module <Link href="https://github.com/sindbach/json-to-bson-go">github.com/sindbach/json-to-bson-go</Link>.
               </Typography>
               </Paper>
           <FormContainer />

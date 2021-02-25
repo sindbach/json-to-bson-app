@@ -72,6 +72,7 @@ type AutoGen struct {
       openAlert: false,
       openValidationAlert: false,
       msgValidationAlert: "",
+      sessionId: Date.now()
     };
 
     this.handleSwitchExtJSON = this.handleSwitchExtJSON.bind(this);
@@ -86,6 +87,11 @@ type AutoGen struct {
     this.handleClearForm = this.handleClearForm.bind(this);
     this.handleValidationAlertClose = this.handleValidationAlertClose.bind(this); 
     this.handleValidationAlertOpen = this.handleValidationAlertOpen.bind(this); 
+    this.createRecord = this.createRecord.bind(this);
+  }
+
+  componentDidMount() {
+    this.createRecord({"type":"view"});
   }
 
   handleValidationAlertOpen(msg) {
@@ -134,6 +140,18 @@ type AutoGen struct {
     this.state.content = newValue;
   }
 
+  createRecord(data){
+    if (data.hasOwnProperty('content')){data.content = "N/A";}
+    data.sessionId = this.state.sessionId;
+    fetch("https://webhooks.mongodb-realm.com/api/client/v2.0/app/json-to-bson-metrics-hozoa/service/record/incoming_webhook/createRecord", {
+      method:'POST', 
+      mode:'cors',
+      cache:'no-cache',
+      headers: {'Content-Type': 'application/json'}, 
+      body: JSON.stringify(data)}
+    );
+  }
+
   handleFormSubmit(e) {
     e.preventDefault();
     this.state.showProgress = true; 
@@ -157,7 +175,7 @@ type AutoGen struct {
       "truncateint": this.state.truncateInt,
       "topname": this.state.topname,
     };
-    console.log(param);
+    this.createRecord(param);
     fetch("/.netlify/functions/convert", {
         method:'POST', 
         mode:'cors',
@@ -166,12 +184,21 @@ type AutoGen struct {
         redirect:'follow', 
         body: JSON.stringify(param)}
         ).then(response => {
+          if (response.status!==200) {
+            this.handleValidationAlertOpen(
+              "Failed to reach the processing server"
+            );
+            return {"internalError":true};
+          }
           return response.json();
         }).then(result=>{
+          if (result.internalError === true ) {
+            return;
+          }
           console.log(result);
-          if (result.output === "" && result.error !== "") {
+          if (result.errorMessage != "") {
             this.handleValidationAlertOpen(
-              "Module Error: "
+              "Module Error: " + result.errorMessage
             );
           } else {
             this.state.output = result.output;
