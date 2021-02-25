@@ -142,7 +142,6 @@ type AutoGen struct {
 
   createRecord(data){
     var record = data; 
-    if (record.hasOwnProperty('content')){record.content = "N/A";}
     record.sessionId = this.state.sessionId;
     fetch("https://webhooks.mongodb-realm.com/api/client/v2.0/app/json-to-bson-metrics-hozoa/service/record/incoming_webhook/createRecord", {
       method:'POST', 
@@ -176,7 +175,6 @@ type AutoGen struct {
       "truncateint": this.state.truncateInt,
       "topname": this.state.topname,
     };
-    this.createRecord(param);
     fetch("/.netlify/functions/convert", {
         method:'POST', 
         mode:'cors',
@@ -207,6 +205,7 @@ type AutoGen struct {
             this.setState(this.state);
           }
     }); 
+    this.createRecord(param);
   }
 
   handleCopyClipboard(e){
