@@ -141,7 +141,11 @@ type AutoGen struct {
   }
 
   createRecord(data){
-    var record = data; 
+    var record = Object.assign({}, data);
+    if (record.hasOwnProperty('content')) {
+      record.content = '{"key":"censored"}';
+      record.output = this.state.output;
+    }
     record.sessionId = this.state.sessionId;
     fetch("https://webhooks.mongodb-realm.com/api/client/v2.0/app/json-to-bson-metrics-hozoa/service/record/incoming_webhook/createRecord", {
       method:'POST', 
