@@ -3,12 +3,12 @@ package main
 import (
 	"encoding/json"
 	"fmt"
+
 	"github.com/aws/aws-lambda-go/events"
 	"github.com/aws/aws-lambda-go/lambda"
 
-	"github.com/sindbach/json-to-bson-go/extjson"
+	"github.com/sindbach/json-to-bson-go/convert"
 	"github.com/sindbach/json-to-bson-go/options"
-	"github.com/sindbach/json-to-bson-go/simplejson"
 )
 
 // BodyResponse is the returned result
@@ -45,12 +45,8 @@ func handler(request events.APIGatewayProxyRequest) (*events.APIGatewayProxyResp
 	opt.SetMinimizeIntegerSize(bodyInput.MinIntSize)
 	opt.SetTruncateIntegers(bodyInput.TruncateInt)
 
-	var result string
-	if bodyInput.ExtJSON == true {
-		result, err = extjson.Convert(contentString, opt)
-	} else {
-		result, err = simplejson.Convert(contentString, opt)
-	}
+	result, err := convert.Convert(contentString, opt)
+
 	errMsg := ""
 	if err != nil {
 		errMsg = err.Error()
