@@ -69,12 +69,8 @@ github.com/rogpeppe/go-internal v1.2.2/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFR
 github.com/rogpeppe/go-internal v1.3.0/go.mod h1:M8bDsm7K2OlrFYOpmOWEs/qY81heoFRclV5y23lUDJ4=
 github.com/russross/blackfriday/v2 v2.0.1/go.mod h1:+Rmxgy9KzJVeS9/2gXHxylqXiyQDYRxCVz55jmeOWTM=
 github.com/shurcooL/sanitized_anchor_name v1.0.0/go.mod h1:1NzhyTcUVG4SuEtjjoZeVRXNmyL/1OwPU0+IJeTBvfc=
-github.com/sindbach/json-to-bson-go v0.0.5-0.20210228233339-4549adcf7d41 h1:xNUpAd4TPKk4+raszOJgxBlxw24Sm4kRxc2F+xZrReI=
-github.com/sindbach/json-to-bson-go v0.0.5-0.20210228233339-4549adcf7d41/go.mod h1:cExGsWxHRFZYQHENdjSoUhnLjS6xUyl3aeM0EqCO7a4=
-github.com/sindbach/json-to-bson-go v0.0.5-0.20210301033500-53fa984adeaf h1:7eF3irSitTwQsHbuEaTovzGakCma/YEGFMlOb4tGp5Q=
-github.com/sindbach/json-to-bson-go v0.0.5-0.20210301033500-53fa984adeaf/go.mod h1:cExGsWxHRFZYQHENdjSoUhnLjS6xUyl3aeM0EqCO7a4=
-github.com/sindbach/json-to-bson-go v0.1.1 h1:wATzknTXEKdlEW6Ihot1etCQFLeBvEDR8M4m4vSibwU=
-github.com/sindbach/json-to-bson-go v0.1.1/go.mod h1:cExGsWxHRFZYQHENdjSoUhnLjS6xUyl3aeM0EqCO7a4=
+github.com/sindbach/json-to-bson-go v0.1.2 h1:rnHyz7S9sE4eXwsl01tT1c+5K9O+LbbIN43PwXBXXj0=
+github.com/sindbach/json-to-bson-go v0.1.2/go.mod h1:cExGsWxHRFZYQHENdjSoUhnLjS6xUyl3aeM0EqCO7a4=
 github.com/sirupsen/logrus v1.4.0/go.mod h1:LxeOpSwHxABJmUn/MG1IvRgCAasNZTLOkJPxbbu5VWo=
 github.com/sirupsen/logrus v1.4.1/go.mod h1:ni0Sbl8bgC9z8RoU9G6nDWqqs/fq4eDPysMBDgk/93Q=
 github.com/sirupsen/logrus v1.4.2/go.mod h1:tLMulIdttU9McNUspp0xgXVQah82FyeX6MwdIuYE2rE=
