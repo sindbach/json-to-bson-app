@@ -2,7 +2,9 @@
 
 # JSON To BSON App
 
-An app to aid developers to generate Go BSON class maps
+An app to aid developers to generate Go BSON class maps given a JSON document input. Supports [MongoDB Extended JSON](https://docs.mongodb.com/manual/reference/mongodb-extended-json/) format. 
+
+Utilising [json-to-bson-go](https://github.com/sindbach/json-to-bson-go) module to perform the conversion. 
 
 ## Build Frontend 
 
