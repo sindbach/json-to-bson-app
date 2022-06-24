@@ -6,6 +6,8 @@ An app to aid developers to generate Go BSON class maps given a JSON document in
 
 Utilising [json-to-bson-go](https://github.com/sindbach/json-to-bson-go) module to perform the conversion. 
 
+Visit the app on : https://json-to-bson-map.netlify.app/
+
 ## Build Frontend 
 
 Install [parcel](https://parceljs.org/) command line: 
